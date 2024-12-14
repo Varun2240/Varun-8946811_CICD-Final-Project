@@ -31,12 +31,16 @@ jobs:
         with:
           python-version: '3.x'
 
-      # Step 3: Install dependencies
+      # Step 3: Set PYTHONPATH
+      - name: Set PYTHONPATH
+        run: echo "PYTHONPATH=$PYTHONPATH:$(pwd)/backend" >> $GITHUB_ENV
+
+      # Step 4: Install dependencies
       - name: Install dependencies
         run: |
           pip install -r backend/requirements.txt  # Correct path to requirements.txt
 
-      # Step 4: Run tests (Unit Tests)
+      # Step 5: Run tests (Unit Tests)
       - name: Run tests
         run: |
           pytest backend/tests/test_app.py  # Run your tests from the backend folder
