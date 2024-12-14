@@ -25,12 +25,12 @@ jobs:
       # Step 3: Install dependencies
       - name: Install dependencies
         run: |
-          pip install -r requirements.txt
+          pip install -r backend/requirements.txt  # Correct path to requirements.txt
 
       # Step 4: Run tests (Unit Tests)
       - name: Run tests
         run: |
-          pytest
+          pytest backend/tests/test_app.py  # Run your tests from the backend folder
 
   deploy:
     runs-on: ubuntu-latest
