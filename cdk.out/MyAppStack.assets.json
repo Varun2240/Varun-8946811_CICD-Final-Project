@@ -1,0 +1,19 @@
+{
+  "version": "38.0.1",
+  "files": {
+    "a2ee07571d1a931d70401250e2776df8d22c805b0fe5d807bf20e2953aaa9ba5": {
+      "source": {
+        "path": "MyAppStack.template.json",
+        "packaging": "file"
+      },
+      "destinations": {
+        "current_account-current_region": {
+          "bucketName": "cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}",
+          "objectKey": "a2ee07571d1a931d70401250e2776df8d22c805b0fe5d807bf20e2953aaa9ba5.json",
+          "assumeRoleArn": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/cdk-hnb659fds-file-publishing-role-${AWS::AccountId}-${AWS::Region}"
+        }
+      }
+    }
+  },
+  "dockerImages": {}
+}

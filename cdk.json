@@ -1,0 +1,4 @@
+{
+    "app": "python iac/app_stack.py"
+  }
+  
