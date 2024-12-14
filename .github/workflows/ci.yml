@@ -3,60 +3,47 @@ name: CI/CD Pipeline
 on:
   push:
     branches:
-      - development  # Trigger on pushes to the development branch
+      - development
   pull_request:
     branches:
-      - development  # Trigger on pull requests targeting development
+      - development
 
 jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      # Step 1: Checkout code
       - name: Checkout code
         uses: actions/checkout@v2
 
-      # Debugging: List files in the repository
       - name: List files
-        run: |
-          ls -R  # List all files recursively to verify if backend/requirements.txt exists
+        run: ls -R
 
-      # Debugging: Print working directory
       - name: Print working directory
         run: pwd
 
-      # Step 2: Set up Python (or other language)
       - name: Set up Python
         uses: actions/setup-python@v2
         with:
           python-version: '3.x'
 
-      # Step 3: Set PYTHONPATH
       - name: Set PYTHONPATH
         run: echo "PYTHONPATH=$PYTHONPATH:$(pwd)/backend" >> $GITHUB_ENV
 
-      # Step 4: Install dependencies
       - name: Install dependencies
-        run: |
-          pip install -r backend/requirements.txt  # Correct path to requirements.txt
+        run: pip install -r backend/requirements.txt
 
-      # Step 5: Run tests (Unit Tests)
       - name: Run tests
-        run: |
-          pytest backend/tests/test_app.py  # Run your tests from the backend folder
+        run: pytest backend/tests/test_app.py
 
   deploy:
     runs-on: ubuntu-latest
     needs: build
     steps:
-      # Step 1: Checkout code
       - name: Checkout code
         uses: actions/checkout@v2
 
-      # Step 2: Deploy the application using AWS CDK or Terraform
       - name: Deploy with AWS CDK
-        run: |
-          cdk deploy --require-approval never
+        run: cdk deploy --require-approval never
         env:
           AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
