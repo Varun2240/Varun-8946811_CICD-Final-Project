@@ -12,15 +12,16 @@ class AppStack(Stack):
 
         # S3 bucket for frontend
         frontend_bucket = s3.Bucket(self, "FrontendBucket",
-    website_index_document="index.html",
-    public_read_access=True,
-    block_public_access=s3.BlockPublicAccess(
-        block_public_acls=False,
-        block_public_policy=False,
-        ignore_public_acls=False,
-        restrict_public_buckets=False
-    )
-)
+            website_index_document="index.html",
+            public_read_access=True,
+            block_public_access=s3.BlockPublicAccess(
+                block_public_acls=False,
+                block_public_policy=False,
+                ignore_public_acls=False,
+                restrict_public_buckets=False
+            )
+        )
+
         # VPC and EC2 for backend
         vpc = ec2.Vpc(self, "AppVpc", max_azs=2)
         
@@ -51,6 +52,3 @@ app = App()
 AppStack(app, "MyAppStack")
 
 app.synth()
-
-
-#hiiii
