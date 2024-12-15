@@ -44,7 +44,7 @@ class AppStack(Stack):
 
         # API Gateway with HTTP Integration pointing to the EC2 instance's public IP
         api = apigateway.RestApi(self, "AppApi")
-        integration = apigateway.HttpIntegration(f"http://{eip.ref}")  # Use the EIP for public access
+        integration = apigateway.HttpIntegration(f"http://{eip.ref}")  
         api.root.add_method("GET", integration)
         
 # Define the app
